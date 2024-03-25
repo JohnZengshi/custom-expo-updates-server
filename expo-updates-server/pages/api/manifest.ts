@@ -159,24 +159,24 @@ async function putUpdateInResponseAsync(
   };
 
   let signature = null;
-  const expectSignatureHeader = req.headers['expo-expect-signature'];
-  if (expectSignatureHeader) {
-    const privateKey = await getPrivateKeyAsync();
-    if (!privateKey) {
-      res.statusCode = 400;
-      res.json({
-        error: 'Code signing requested but no key supplied when starting server.',
-      });
-      return;
-    }
-    const manifestString = JSON.stringify(manifest);
-    const hashSignature = signRSASHA256(manifestString, privateKey);
-    const dictionary = convertToDictionaryItemsRepresentation({
-      sig: hashSignature,
-      keyid: 'main',
-    });
-    signature = serializeDictionary(dictionary);
-  }
+  // const expectSignatureHeader = req.headers['expo-expect-signature'];
+  // if (expectSignatureHeader) {
+  //   const privateKey = await getPrivateKeyAsync();
+  //   if (!privateKey) {
+  //     res.statusCode = 400;
+  //     res.json({
+  //       error: 'Code signing requested but no key supplied when starting server.',
+  //     });
+  //     return;
+  //   }
+  //   const manifestString = JSON.stringify(manifest);
+  //   const hashSignature = signRSASHA256(manifestString, privateKey);
+  //   const dictionary = convertToDictionaryItemsRepresentation({
+  //     sig: hashSignature,
+  //     keyid: 'main',
+  //   });
+  //   signature = serializeDictionary(dictionary);
+  // }
 
   const assetRequestHeaders: { [key: string]: object } = {};
   [...manifest.assets, manifest.launchAsset].forEach((asset) => {
@@ -229,24 +229,24 @@ async function putRollBackInResponseAsync(
   const directive = await createRollBackDirectiveAsync(updateBundlePath);
 
   let signature = null;
-  const expectSignatureHeader = req.headers['expo-expect-signature'];
-  if (expectSignatureHeader) {
-    const privateKey = await getPrivateKeyAsync();
-    if (!privateKey) {
-      res.statusCode = 400;
-      res.json({
-        error: 'Code signing requested but no key supplied when starting server.',
-      });
-      return;
-    }
-    const directiveString = JSON.stringify(directive);
-    const hashSignature = signRSASHA256(directiveString, privateKey);
-    const dictionary = convertToDictionaryItemsRepresentation({
-      sig: hashSignature,
-      keyid: 'main',
-    });
-    signature = serializeDictionary(dictionary);
-  }
+  // const expectSignatureHeader = req.headers['expo-expect-signature'];
+  // if (expectSignatureHeader) {
+  //   const privateKey = await getPrivateKeyAsync();
+  //   if (!privateKey) {
+  //     res.statusCode = 400;
+  //     res.json({
+  //       error: 'Code signing requested but no key supplied when starting server.',
+  //     });
+  //     return;
+  //   }
+  //   const directiveString = JSON.stringify(directive);
+  //   const hashSignature = signRSASHA256(directiveString, privateKey);
+  //   const dictionary = convertToDictionaryItemsRepresentation({
+  //     sig: hashSignature,
+  //     keyid: 'main',
+  //   });
+  //   signature = serializeDictionary(dictionary);
+  // }
 
   const form = new FormData();
   form.append('directive', JSON.stringify(directive), {
@@ -278,24 +278,24 @@ async function putNoUpdateAvailableInResponseAsync(
   const directive = await createNoUpdateAvailableDirectiveAsync();
 
   let signature = null;
-  const expectSignatureHeader = req.headers['expo-expect-signature'];
-  if (expectSignatureHeader) {
-    const privateKey = await getPrivateKeyAsync();
-    if (!privateKey) {
-      res.statusCode = 400;
-      res.json({
-        error: 'Code signing requested but no key supplied when starting server.',
-      });
-      return;
-    }
-    const directiveString = JSON.stringify(directive);
-    const hashSignature = signRSASHA256(directiveString, privateKey);
-    const dictionary = convertToDictionaryItemsRepresentation({
-      sig: hashSignature,
-      keyid: 'main',
-    });
-    signature = serializeDictionary(dictionary);
-  }
+  // const expectSignatureHeader = req.headers['expo-expect-signature'];
+  // if (expectSignatureHeader) {
+  //   const privateKey = await getPrivateKeyAsync();
+  //   if (!privateKey) {
+  //     res.statusCode = 400;
+  //     res.json({
+  //       error: 'Code signing requested but no key supplied when starting server.',
+  //     });
+  //     return;
+  //   }
+  //   const directiveString = JSON.stringify(directive);
+  //   const hashSignature = signRSASHA256(directiveString, privateKey);
+  //   const dictionary = convertToDictionaryItemsRepresentation({
+  //     sig: hashSignature,
+  //     keyid: 'main',
+  //   });
+  //   signature = serializeDictionary(dictionary);
+  // }
 
   const form = new FormData();
   form.append('directive', JSON.stringify(directive), {
