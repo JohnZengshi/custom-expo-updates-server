@@ -15,10 +15,14 @@ COPY package*.json ./
 RUN npm install
 
 # 将项目文件复制到工作目录
-COPY . .
+# COPY . .
+COPY .next ./.next
+
+# 复制 next.config.js 到工作目录
+COPY next.config.js ./
 
 # 构建 Next.js 项目
-RUN npm run build
+# RUN npm run build
 
 # 暴露 Next.js 默认端口
 EXPOSE 3000
