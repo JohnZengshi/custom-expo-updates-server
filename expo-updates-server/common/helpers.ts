@@ -57,7 +57,8 @@ export async function getLatestUpdateBundlePathForRuntimeVersionAsync(runtimeVer
   )
     .filter(truthy)
     .sort((a, b) => parseInt(b, 10) - parseInt(a, 10));
-  return path.join(updatesDirectoryForRuntimeVersion, directoriesInUpdatesDirectory[0]);
+  // return path.join(updatesDirectoryForRuntimeVersion, directoriesInUpdatesDirectory[0]);
+  return `${updatesDirectoryForRuntimeVersion}/${directoriesInUpdatesDirectory[0]}`
 }
 
 type GetAssetMetadataArg =
@@ -85,7 +86,6 @@ export async function getAssetMetadataAsync(arg: GetAssetMetadataArg) {
   const key = createHash(asset, 'md5', 'hex');
   const keyExtensionSuffix = arg.isLaunchAsset ? 'bundle' : arg.ext;
   const contentType = arg.isLaunchAsset ? 'application/javascript' : mime.getType(arg.ext);
-
   return {
     hash: assetHash,
     key,
